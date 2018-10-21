@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>CRUDforUdemy</title>
+</head>
+<body>
+<h1　th:text="${title}">ようこそ</h1>
+<ul>
+	<li th:each="error : ${#fields.detailedErrors()}"
+	th:text="${error.message}" />
+</ul>
+<form method="post" action="#" th:action="@{/test}" th:if="${instructorForm.isNewInstructor}" th:object="${instructorForm}">
+	<label>FirstName</label>
+	<input type="text" name="firstName" th:value="*{firstName}" />
+	<label>LastName</label>
+	<input type="text" name="lastName" th:value="*{lastName}" />
+	<label>Email</label>
+	<div th:if="${#fields.hasErrors('email')}" 
+	th:errors="*{email}"></div>
+	<div th:if="${#fields.hasErrors('validEmail')}" 
+	th:errors="*{validEmail}"></div>
+	<input type="text" name="email" th:value="*{email}" />
+	<div th:if="${#fields.hasErrors('youtubeChannel')}" 
+	th:errors="*{youtubeChannel}"></div>
+	<label>YoutubeChannel</label>
+	<input type="text" name="youtubeChannel" th:value="*{youtubeChannel}" />
+	<label>Hobby</label>
+	<input type="text" name="hobby" th:value="*{hobby}" />
+	<input type="submit" value="送信">
+</form>
+<form method="POST" th:action="@{/test/update/{id}(id=${instructorId})}" th:unless="${instructorForm.isNewInstructor}" th:object="${instructorForm}">
+	<label>FirstName</label>
+	<input type="text" name="firstName" th:value="*{firstName}" />
+	<label>LastName</label>
+	<input type="text" name="lastName" th:value="*{lastName}" />
+	<label>Email</label>
+	<input type="text" name="email" th:value="*{email}" />
+	<label>YoutubeChannel</label>
+	<input type="text" name="youtubeChannel" th:value="*{youtubeChannel}" />
+	<label>Hobby</label>
+	<input type="text" name="hobby" th:value="*{hobby}" />
+	<input type="hidden" name="_method" value="PUT">
+	<input type="submit" value="変更">
+</form>
+<table>
+<tr th:each="obj : ${list}">
+	<td th:text=${obj.id}></td>
+	<td th:text=${obj.firstName}></td>
+	<td th:text=${obj.email}></td>
+	<td th:text=${obj.instructorDetail.hobby}></td>
+	<td><a type="button" th:href="@{/test/{id}(id=${obj.id})}">編集</a></td>
+	<td><form method="POST" th:action="@{/test/delete/{id}(id=${obj.id})}">
+		<input type="hidden" name="_method" value="DELETE">
+		<input type="submit" value="削除">
+	</form>
+</tr>
+</table>
+<form action="#" th:action="@{/logout}" method="POST">
+	<input type="submit" value="Logout" />
+</form>
+</body>
+</html>

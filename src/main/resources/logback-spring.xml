@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <!--<property name="logFileName" value="app" />-->
+
+    <!--develop環境用設定 -->
+    <springProfile name="dev">
+        <property name="rootLogLevel" value="INFO" />
+    </springProfile>
+
+    <!--production環境用設定 -->
+    <springProfile name="prod">
+        <property name="rootLogLevel" value="ERROR" />
+    </springProfile>
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.example.dbtest.DbtestApplication">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <root level="${rootLogLevel}">
+        <appender-ref ref="STDOUT" />
+        <!--<appender-ref ref="LOG_FILE" />-->
+    </root>
+</configuration>

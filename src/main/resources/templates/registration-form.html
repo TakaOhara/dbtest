@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="album.css" th:href="@{/css/album.css}" rel="stylesheet" media="screen" />
+    <link href="signin.css" th:href="@{/css/signin.css}" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" method="post" action="#" th:action="@{/register/processRegistrationForm}" th:if="${registrationForm.isNewRegistration}" th:object="${registrationForm}">
+		<img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" th:src="@{/img/bootstrap-solid.svg}" alt="" width="72" height="72">
+		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<label for="inputUsername" class="sr-only">Username</label>
+		<input type="text" name="username"  th:value="*{username}" id="inputUsername"  class="form-control mt-3" placeholder="UserName" required autofocus>
+		<div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+		<label for="inputEmail" class="sr-only">Email address</label>
+		<input type="text" name="email"  th:value="*{email}" id="inputEmail"  class="form-control mt-3" placeholder="Email address" required>
+		<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+		<label for="inputPassword" class="sr-only">Password</label>
+		<input type="password" name="password" id="inputPassword" class="form-control mt-3" placeholder="Password" required>
+		<div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+		<a href="#" th:href="@{/}">Back to Top page</a>
+    </form>
+  </body>
+</html>
