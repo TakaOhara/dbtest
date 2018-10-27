@@ -14,7 +14,11 @@ public class TaskServiceImpl implements TaskService {
 
 	private final TaskRepository repository;
 
-	@Autowired
+    /**
+     * コンストラクタ
+     * @param repository
+     */
+	@Autowired // コンストラクタインジェクション
 	public TaskServiceImpl(TaskRepository repository) {
 		this.repository = repository;
 	}
@@ -27,16 +31,13 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Optional<TaskForm> getTaskForm(int id) {
 		Optional<Task> task = repository.findById(id);
+
 		if(!task.isPresent()) {
-			return Optional.ofNullable(null);
+			return Optional.empty(); // emptyを使うのが望ましいです
 		}
-		TaskForm form = new TaskForm(
-				task.get().getTypeId(),
-				task.get().getTitle(),
-				task.get().getDetail(),
-				task.get().getDeadline(),
-				false);
-		return Optional.ofNullable(form);
+        // mapを使ってスマートに記述
+		return task.map(tsk ->
+                new TaskForm(tsk.getTypeId(), tsk.getTitle(), tsk.getDetail(), tsk.getDeadline(), false));
 	}
 
 	@Override
@@ -46,12 +47,8 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void deleteById(int id) {
-		Optional<Task> task =  repository.findById(id);
-		System.out.println(task.isPresent());
-		if(task.isPresent()) {
+		if(repository.findById(id).isPresent()) { // 不要な変数宣言の省略
 			repository.deleteById(id);
 		}
-
 	}
-
 }
