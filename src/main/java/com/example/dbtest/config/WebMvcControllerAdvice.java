@@ -13,6 +13,7 @@ public class WebMvcControllerAdvice {
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
+        // Stringの空文字をNULLに
         dataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 }
