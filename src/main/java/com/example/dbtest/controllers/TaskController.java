@@ -4,7 +4,6 @@ import com.example.dbtest.entity.Task;
 import com.example.dbtest.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -45,8 +44,8 @@ public class TaskController {
 //        return mav;
 //    }
 
-    // TODO Modelを引数にした場合、自動的にModelAttributeに登録されます
-    // TODO POJOの場合、ModelAttributeアノテーションは不要です。名称: TaskForm -> taskForm
+    // Modelを引数にした場合、自動的にModelAttributeに登録されます
+    // POJOの場合、ModelAttributeアノテーションは不要です。名称: TaskForm -> taskForm
 
     //INDEX
     @GetMapping
@@ -62,9 +61,9 @@ public class TaskController {
 
     //INSERT
     @PostMapping
-    @Transactional(readOnly = false)
+//    @Transactional(readOnly = false)
     public ModelAndView insert(
-            @Validated TaskForm taskForm,//ヴァリデーションはフォームクラスに対して行う
+            @Validated TaskForm taskForm, //ヴァリデーションはフォームクラスに対して行う
             BindingResult result,
             ModelAndView mav) {
 
@@ -85,7 +84,7 @@ public class TaskController {
     }
 
     //Before UPDATE
-    @GetMapping(value = "/{id}")//編集ページ
+    @GetMapping("/{id}")//編集ページ
     public ModelAndView showUpdate(
             @ModelAttribute("taskForm") TaskForm taskForm,
             @PathVariable Integer id,
@@ -117,7 +116,7 @@ public class TaskController {
      * @return
      */
     @PostMapping("/update/{id}")
-    @Transactional(readOnly = false)
+//    @Transactional(readOnly = false)
     public ModelAndView update(@PathVariable Integer id, @ModelAttribute("taskForm") TaskForm taskForm, ModelAndView mav) {
         Task task = makeTask(id, taskForm);
         taskService.save(task);
@@ -133,7 +132,8 @@ public class TaskController {
      * @return
      */
     @PostMapping("/delete/{id}")
-    @Transactional(readOnly = false)//削除の場合必須
+    // Controller層をトランザクション境界にするのは望ましくありません
+//    @Transactional(readOnly = false)//削除の場合必須
     public ModelAndView delete(@PathVariable Integer id, ModelAndView mav) {
         taskService.deleteById(id);
         mav.setViewName("redirect:/task");
