@@ -2,8 +2,6 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml" />
 
-    <!--<property name="logFileName" value="app" />-->
-
     <!--develop環境用設定 -->
     <springProfile name="dev">
         <property name="rootLogLevel" value="INFO" />
