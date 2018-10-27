@@ -12,8 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * Web Security設定ファイル
+ */
 @EnableWebSecurity
-//@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -30,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
         authProvider.setUserDetailsService(userInfoService);
-        authProvider.setPasswordEncoder(passwordEncoder); // TODO Beanを使う
+        authProvider.setPasswordEncoder(passwordEncoder); // Beanを使う
 
         return authProvider;
     }
@@ -40,7 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
 //                .antMatchers("/", "/register/**").permitAll()
-                .mvcMatchers("/", "/register/**").permitAll()  // **はそれより下の階層全て TODO mvcMatcherを使う
+
+                // antMatchers mvcMatcherを使う
+                .mvcMatchers("/", "/register/**").permitAll()  // **はそれより下の階層全て
                 .anyRequest().authenticated()//それ以外は認証無しでのアクセス不可
                 .and()
                 .formLogin()
@@ -61,7 +65,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/bootstrap/**");
         web.ignoring().mvcMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/bootstrap/**", "/webjars/**", "/favicon.ico");
     }
-
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
