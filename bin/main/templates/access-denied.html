@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:test="${title}">Access Denied</title>
+</head>
+<body>
+<h1 th:text="${title}">ようこそ</h1>
+
+<p>許可されていません。</p>
+<a href="#" th:href="@{/test}"></a>
+</body>
+</html>

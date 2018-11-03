@@ -1,0 +1,9 @@
+spring:
+  messages:
+    basename: i18n/messages #指定しなければclasspath:messages.propertiesとなる  カンマ区切りで複数指定可
+    encoding: UTF-8
+  profiles:
+    active: dev # デフォルトのプロファイル application-dev.yml が参照される
+server:
+  servlet:
+    context-path: / # コンテキストパスの定義 デフォルト: /
