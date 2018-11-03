@@ -1,16 +1,24 @@
 package com.example.dbtest.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "instructor_detail")
 // TODO lombokを使用
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 @ToString(of = "id")
 @EqualsAndHashCode(of = "id")
 public class InstructorDetail {

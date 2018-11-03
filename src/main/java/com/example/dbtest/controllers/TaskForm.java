@@ -1,15 +1,18 @@
 package com.example.dbtest.controllers;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 public class TaskForm implements Serializable {
 
