@@ -76,7 +76,7 @@ public class TaskController {
             taskForm.setNewTask(true);
             mav.addObject("taskForm", taskForm);
             List<Task> list = taskService.findAll();
-            mav.addObject("list", list);
+            mav.addObject("list", list);//sessionに格納
             mav.addObject("title", "タスク一覧 afterInsert");
             mav.setViewName("task");
         }

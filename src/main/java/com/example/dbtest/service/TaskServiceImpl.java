@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
 			return Optional.empty(); // emptyを使うのが望ましいです
 		}
         // mapを使ってスマートに記述
-		return task.map(tsk ->
+		return task.map(tsk ->//1ラムダ式　taskは保持する実際の値
                 new TaskForm(tsk.getTypeId(), tsk.getTitle(), tsk.getDetail(), tsk.getDeadline(), false));
 	}
 

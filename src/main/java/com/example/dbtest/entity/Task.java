@@ -48,6 +48,7 @@ public class Task {
 
     @JoinColumn(name = "deadline")
     private LocalDateTime deadline;
+    
 
     public Task(int typeId, String title, String detail, LocalDateTime deadline) {
         this.typeId = typeId;
