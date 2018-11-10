@@ -1,9 +1,6 @@
 package com.example.dbtest.service;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.times;
@@ -128,6 +125,22 @@ class TaskServiceImplUnitTest {
         
     }
     
+    @Test // テストケース
+    @DisplayName("存在しないidの場合メソッドが実行されないことを確認するテスト")
+        // テスト名
+    void testDeleteByIdNotFound() {
+    	
+        // モッククラスのI/Oをセット
+        when(taskRepository.findById(0)).thenReturn(Optional.empty());
 
+        // サービスを実行
+        taskServiceImpl.deleteById(0);
 
+        // モックの指定メソッドの実行回数を検査
+        verify(taskRepository, times(0)).deleteById(0);
+
+        
+    }
+    
+    
 }
