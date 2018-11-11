@@ -1,13 +1,15 @@
 package com.example.dbtest.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.dbtest.controllers.TaskForm;
 import com.example.dbtest.entity.Task;
 import com.example.dbtest.repositories.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -41,11 +43,13 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void save(Task task) {
 		repository.saveAndFlush(task);
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void deleteById(int id) {
 		if(repository.findById(id).isPresent()) { // 不要な変数宣言の省略
 			repository.deleteById(id);

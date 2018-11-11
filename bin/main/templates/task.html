@@ -177,7 +177,6 @@
                   <td><a type="button" class="btn btn-outline-success" th:href="@{/task/{id}(id=${obj.id})}">編集</a></td>
                   <td>
                     <form method="POST" th:action="@{/task/delete/{id}(id=${obj.id})}">
-					<input type="hidden" name="_method" value="DELETE">
 					<button type="submit" class="btn btn-outline-danger">削除</button>
 					</form>
 				  </td>
@@ -218,7 +217,6 @@
 			<div th:if="${#fields.hasErrors('deadline')}" 
 			th:errors="*{deadline}"></div>
 		  </div>
-		  <input type="hidden" name="_method" value="PUT">
 		  <button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 		<a href="#" th:href="@{/task}">戻る</a>
