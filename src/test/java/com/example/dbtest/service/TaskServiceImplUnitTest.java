@@ -121,11 +121,11 @@ class TaskServiceImplUnitTest {
 
         // 戻り値の検査(1件インスタンスが戻ってきていることを検査する方法は？
         //これでよいか？
-        assertTrue( taskActual.get() instanceof TaskForm );
+        assertTrue( taskActual.get() instanceof TaskForm );//Optional.isPresent()を使用する
         
     }
     
-    @Test // テストケース
+    @Test // テストケース　単体テストではデータベースの例外は考えない
     @DisplayName("存在しないidの場合メソッドが実行されないことを確認するテスト")
         // テスト名
     void testDeleteByIdNotFound() {

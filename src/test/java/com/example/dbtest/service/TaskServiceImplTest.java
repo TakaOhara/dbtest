@@ -29,7 +29,7 @@ class TaskServiceImplTest {
     @Autowired
     private TaskService taskService;
 
-    @Test
+    @Test//order byがある場合は順序の確認することがある
     @DisplayName("全件検索のテスト")
     void testFindAllCheckCount() {
         List<Task> list = taskService.findAll();
@@ -46,7 +46,7 @@ class TaskServiceImplTest {
         assertNull(taskO.orElse(null), "結果がNULLではありません");
     }
     
-    @Test
+    @Test//この段階で画面ができていない可能性　制作中は基本的には単体テストで検査する
     @DisplayName("1件のタスクが取得できた場合のテスト")
     void testGetTaskFormReturnOne() {
         Optional<TaskForm> task = taskService.getTaskForm(1);

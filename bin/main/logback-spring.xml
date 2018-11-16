@@ -4,7 +4,7 @@
 
     <!--develop環境用設定 -->
     <springProfile name="dev">
-        <property name="rootLogLevel" value="INFO" />
+        <property name="rootLogLevel" value="WARN" />
     </springProfile>
 
     <!--production環境用設定 -->
