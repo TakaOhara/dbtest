@@ -98,12 +98,29 @@ public class TaskController {
     @PostMapping("/update/{id}")
     public String update(
     	@PathVariable Integer id, 
-    	@Valid @ModelAttribute TaskForm taskForm, 
+    	@Valid @ModelAttribute TaskForm taskForm,
+    	BindingResult result,
     	Model model) {
     	
-        Task task = makeTask(id, taskForm);
-        taskService.save(task);
-        return "redirect:/task/" + id + "/?complete";
+    	//isNewTaskにfalseが代入される
+        Optional<TaskForm> form = taskService.getTaskForm(id);
+
+        if (!form.isPresent()) {
+            return "redirect:/task";
+        }
+    	
+    	Task task = makeTask(id, taskForm);
+    	
+        if (!result.hasErrors()) {
+        	taskService.save(task);
+            return "redirect:/task/" + id + "/?complete";
+        } else {
+            model.addAttribute("taskForm", taskForm);
+            model.addAttribute("title", "タスク編集画面");
+            return "task";
+        }
+        
+        
     }
 
     /**

@@ -132,23 +132,23 @@
 		      <option value="2">重要</option>
 		      <option value="3">できれば</option>
 		    </select>
-		    <div th:if="${#fields.hasErrors('typeId')}" th:errors="*{typeId}"></div>
+		    <div th:if="${#fields.hasErrors('typeId')}" th:errors="*{typeId}" class="text-danger"></div>
 		  </div>
 		  <div class="form-group">
 		    <label for="title">タスクタイトル</label>
 		    <input type="text" name="title" class="form-control" id="title" placeholder="Title">
-		    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+		    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></div>
 		  </div>
 		  <div class="form-group">
 		    <label for="detail">詳細</label>
 		    <textarea name="detail" class="form-control" id="detail" rows="3">内容を記入してください。</textarea>
-		    <div th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></div>
+		    <div th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" class="text-danger"></div>
 		  </div>
 		  <div class="form-group">
 		  <label for="deadline">期限</label>
 			<input class="form-control" type="datetime-local" id="deadline" name="deadline" th:field="*{deadline}">
 			<div th:if="${#fields.hasErrors('deadline')}" 
-			th:errors="*{deadline}"></div>
+			th:errors="*{deadline}" class="text-danger"></div>
 		  </div>
 		
 		
@@ -204,18 +204,17 @@
 		  <div class="form-group">
 		    <label for="title">タスクタイトル</label>
 		    <input type="text" name="title" class="form-control" id="title" placeholder="Title" th:value="*{title}">
-		    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+		    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"  class="text-danger"></div>
 		  </div>
 		  <div class="form-group">
 		    <label for="detail">詳細</label>
 		    <textarea class="form-control" id="detail" rows="3" th:field="*{detail}">内容を記入してください。</textarea>
-		    <div th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></div>
+		    <div th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"  class="text-danger"></div>
 		  </div>
 		  <div class="form-group">
 		  <label for="deadline">期限</label>
 			<input class="form-control" type="datetime-local" id="deadline" name="deadline" th:field="*{deadline}">
-			<div th:if="${#fields.hasErrors('deadline')}" 
-			th:errors="*{deadline}"></div>
+			<div th:if="${#fields.hasErrors('deadline')}"  th:errors="*{deadline}"  class="text-danger"></div>
 		  </div>
 		  <button type="submit" class="btn btn-primary">Submit</button>
 		</form>

@@ -62,7 +62,7 @@ class TaskControllerTest {
 	@Test
 	@DisplayName("titleが空でバリデーションが機能するか確認するテスト")
     @WithMockUser 
-    public void testValidation1() throws Exception {
+    public void testPostValidation1() throws Exception {
     	
 		TaskForm taskForm = new TaskForm();
 	    taskForm.setTitle("");;
@@ -80,7 +80,7 @@ class TaskControllerTest {
 	@Test
 	@DisplayName("バリデーションを通過するテスト")
     @WithMockUser 
-    public void testValidation2() throws Exception {
+    public void testPostValidation2() throws Exception {
     	
 		TaskForm taskForm = new TaskForm();
 		taskForm.setTypeId(1);
@@ -92,6 +92,34 @@ class TaskControllerTest {
     			.with(SecurityMockMvcRequestPostProcessors.csrf())
     			.flashAttr("taskForm",taskForm))
     	.andExpect(status().is3xxRedirection());//status()でStatusResultMatchersを取得している
+    	
+    }
+	
+	@Test
+	@DisplayName("存在しないidでGetするとリダイレクトするか確認するテスト")
+    @WithMockUser 
+    public void testGetUpdateForm() throws Exception {
+    	
+		mvc.perform(get("/task/3"))
+    	.andExpect(status().is3xxRedirection());
+    	
+    }
+	
+	@Test
+	@DisplayName("存在しないidでUpdateするとリダイレクトするか確認するテスト")
+    @WithMockUser 
+    public void tesUpdateInvalidId() throws Exception {
+		
+		TaskForm taskForm = new TaskForm();
+		taskForm.setTypeId(1);
+	    taskForm.setTitle("サンプルタイトル");;
+	    taskForm.setDetail("サンプル詳細");
+	    taskForm.setDeadline( LocalDateTime.of(2019, 11, 10, 13, 0));
+	    
+		mvc.perform(post("/task/update/3")
+				.with(SecurityMockMvcRequestPostProcessors.csrf())
+    			.flashAttr("taskForm",taskForm))
+    	.andExpect(status().is3xxRedirection());
     	
     }
 
